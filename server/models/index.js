@@ -13,9 +13,12 @@ let sequelize;
 
 // Integrate dialectModulePath and dialectModule logic
 if (config.dialectModulePath) {
-    require(config.dialectModulePath); // Require the specified module
+    // Dynamically load the dialect module using path
+    const dialectModule = require(config.dialectModulePath);
+    config.dialectModule = dialectModule; // Assign it to config.dialectModule
 } else if (config.dialectModule) {
-    config.dialectModule = require(config.dialectModule); // Use it directly
+    // Use dialectModule directly if it's already set
+    config.dialectModule = require(config.dialectModule);
 }
 
 // Initialize Sequelize instance
