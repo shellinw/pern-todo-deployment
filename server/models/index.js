@@ -10,18 +10,6 @@ const config = require(__dirname + "/../config/config.json")[env];
 const db = {};
 
 let sequelize;
-
-// Integrate dialectModulePath and dialectModule logic
-if (config.dialectModulePath) {
-    // Dynamically load the dialect module using path
-    const dialectModule = require(config.dialectModulePath);
-    config.dialectModule = dialectModule; // Assign it to config.dialectModule
-} else if (config.dialectModule) {
-    // Use dialectModule directly if it's already set
-    config.dialectModule = require(config.dialectModule);
-}
-
-// Initialize Sequelize instance
 if (config.use_env_variable) {
     sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
@@ -33,7 +21,6 @@ if (config.use_env_variable) {
     );
 }
 
-// Dynamically import models
 fs.readdirSync(__dirname)
     .filter((file) => {
         return (
@@ -51,7 +38,6 @@ fs.readdirSync(__dirname)
         db[model.name] = model;
     });
 
-// Establish associations
 Object.keys(db).forEach((modelName) => {
     if (db[modelName].associate) {
         db[modelName].associate(db);
