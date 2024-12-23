@@ -4,7 +4,9 @@
     "password": "postgres",
     "database": "PERN_TODO",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "mysql",
+    "dialectModulePath": "mysql2",
+    "use_env_variable": "DATABASE_URL"
   },
   "test": {
     "username": "root",
