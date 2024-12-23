@@ -17,10 +17,12 @@
   },
   "production": {
     "username": "root",
-    "password": null,
+    "password": "postgres",
     "database": "DATABASE_URL",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "mysql",
+    "dialectModulePath": "mysql2",
+    "logging": false
   }
 }
 
